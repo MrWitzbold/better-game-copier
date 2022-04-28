@@ -73,7 +73,7 @@
 	TextLabel.Position = UDim2.new(-0.122727267, 0, 1, 0)
 	TextLabel.Size = UDim2.new(0, 273, 0, 51)
 	TextLabel.Font = Enum.Font.SourceSans
-	TextLabel.Text = "Will send script to clipboard when finished"
+	TextLabel.Text = "Will notify through a new window when finished"
 	TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 	TextLabel.TextScaled = true
 	TextLabel.TextSize = 14.000
@@ -145,141 +145,143 @@
 			return name
 		end
 		
-		function new_line(new_script)
+		function newline(new_script)
+			wait(0.1)
 			setclipboard("Script://" .. new_script)
 			print(new_script)
-			wait(0.05)
 		end
 		
 		function add_code(object, new_name, old_name)
+			code = ""
 			if object:IsA("Part") then
-				new_line(new_name .. " = Instance.new(\"Part\")")
-				new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-				new_line(new_name .. ".Parent = " .. object.Parent.Name)
+				code = code .. "\n" .. (new_name .. " = Instance.new(\"Part\")")
+				code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+				code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 				local R = tostring(object.Color.R)
 				local G = tostring(object.Color.G)
 				local B = tostring(object.Color.B)
-				new_line(new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
-				new_line(new_name .. ".Material = " .. tostring(object.Material))
-				new_line(new_name .. ".Reflectance = " .. tostring(object.Reflectance))
-				new_line(new_name .. ".Transparency = " .. tostring(object.Transparency))
-				new_line(new_name .. ".Locked = " .. tostring(object.Locked))
-				new_line(new_name .. ".Size = Vector3.new(" .. tostring(object.Size) .. ")")
-				new_line(new_name .. ".Position = Vector3.new(" .. tostring(object.Position) .. ")")
-				new_line(new_name .. ".Orientation = Vector3.new(" .. tostring(object.Orientation) .. ")")
-				new_line(new_name .. ".CanCollide = " .. tostring(object.CanCollide))
-				new_line(new_name .. ".CanTouch = " .. tostring(object.CanTouch))
-				new_line(new_name .. ".Anchored = " .. tostring(object.Anchored))
+				code = code .. "\n" .. (new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+				code = code .. "\n" .. (new_name .. ".Material = " .. tostring(object.Material))
+				code = code .. "\n" .. (new_name .. ".Reflectance = " .. tostring(object.Reflectance))
+				code = code .. "\n" .. (new_name .. ".Transparency = " .. tostring(object.Transparency))
+				code = code .. "\n" .. (new_name .. ".Locked = " .. tostring(object.Locked))
+				code = code .. "\n" .. (new_name .. ".Size = Vector3.new(" .. tostring(object.Size) .. ")")
+				code = code .. "\n" .. (new_name .. ".Position = Vector3.new(" .. tostring(object.Position) .. ")")
+				code = code .. "\n" .. (new_name .. ".Orientation = Vector3.new(" .. tostring(object.Orientation) .. ")")
+				code = code .. "\n" .. (new_name .. ".CanCollide = " .. tostring(object.CanCollide))
+				code = code .. "\n" .. (new_name .. ".CanTouch = " .. tostring(object.CanTouch))
+				code = code .. "\n" .. (new_name .. ".Anchored = " .. tostring(object.Anchored))
 				
-				new_line(new_name .. ".Massless = " .. tostring(object.Massless))
-				new_line(new_name .. ".RootPriority = " .. tostring(object.RootPriority))
-				new_line(new_name .. ".Shape = " .. tostring(object.Shape))
+				code = code .. "\n" .. (new_name .. ".Massless = " .. tostring(object.Massless))
+				code = code .. "\n" .. (new_name .. ".RootPriority = " .. tostring(object.RootPriority))
+				code = code .. "\n" .. (new_name .. ".Shape = " .. tostring(object.Shape))
 				
-				new_line(new_name .. ".BackSurface = " .. tostring(object.BackSurface))
-				new_line(new_name .. ".BottomSurface = " .. tostring(object.BottomSurface))
-				new_line(new_name .. ".FrontSurface = " .. tostring(object.FrontSurface))
-				new_line(new_name .. ".LeftSurface = " .. tostring(object.LeftSurface))
-				new_line(new_name .. ".RightSurface = " .. tostring(object.RightSurface))
-				new_line(new_name .. ".TopSurface = " .. tostring(object.TopSurface))
+				code = code .. "\n" .. (new_name .. ".BackSurface = " .. tostring(object.BackSurface))
+				code = code .. "\n" .. (new_name .. ".BottomSurface = " .. tostring(object.BottomSurface))
+				code = code .. "\n" .. (new_name .. ".FrontSurface = " .. tostring(object.FrontSurface))
+				code = code .. "\n" .. (new_name .. ".LeftSurface = " .. tostring(object.LeftSurface))
+				code = code .. "\n" .. (new_name .. ".RightSurface = " .. tostring(object.RightSurface))
+				code = code .. "\n" .. (new_name .. ".TopSurface = " .. tostring(object.TopSurface))
+				newline(code)
 		end
 
 		if object:IsA("Atmosphere") then
-			new_line(new_name .. " = Instance.new(\"Atmosphere\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Atmosphere\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 			
 			local R = tostring(object.Color.R)
 			local G = tostring(object.Color.G)
 			local B = tostring(object.Color.B)
-			new_line(new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+			code = code .. "\n" .. (new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
 			
 			local R = tostring(object.Decay.R)
 			local G = tostring(object.Decay.G)
 			local B = tostring(object.Decay.B)
-			new_line(new_name .. ".Decay = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+			code = code .. "\n" .. (new_name .. ".Decay = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
 			
-			new_line(new_name .. ".Glare = " .. tostring(object.Glare))
-			new_line(new_name .. ".Haze = " .. tostring(object.Haze))
+			code = code .. "\n" .. (new_name .. ".Glare = " .. tostring(object.Glare))
+			code = code .. "\n" .. (new_name .. ".Haze = " .. tostring(object.Haze))
 		end
 		
 		if object:IsA("Clouds") then
-			new_line(new_name .. " = Instance.new(\"Clouds\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Clouds\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 			
-			new_line(new_name .. ".Cover = " .. tostring(object.Cover))
-			new_line(new_name .. ".Density = " .. tostring(object.Density))
+			code = code .. "\n" .. (new_name .. ".Cover = " .. tostring(object.Cover))
+			code = code .. "\n" .. (new_name .. ".Density = " .. tostring(object.Density))
 			
 			local R = tostring(object.Color.R)
 			local G = tostring(object.Color.G)
 			local B = tostring(object.Color.B)
-			new_line(new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+			code = code .. "\n" .. (new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
 		end
 		
 		if object:IsA("Sky") then
-			new_line(new_name .. " = Instance.new(\"Sky\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Sky\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 			
-			new_line(new_name .. ".CelestialBodiesShow = " .. tostring(object.CelestialBodiesShow))
-			new_line(new_name .. ".MoonAngularSize = " .. tostring(object.MoonAngularSize))
-			new_line(new_name .. ".MoonTextureId = " .. object.MoonTextureId)
+			code = code .. "\n" .. (new_name .. ".CelestialBodiesShow = " .. tostring(object.CelestialBodiesShow))
+			code = code .. "\n" .. (new_name .. ".MoonAngularSize = " .. tostring(object.MoonAngularSize))
+			code = code .. "\n" .. (new_name .. ".MoonTextureId = " .. object.MoonTextureId)
 			
-			new_line(new_name .. ".SkyboxBk = " .. object.SkyboxBk)
-			new_line(new_name .. ".SkyboxDn = " .. object.SkyboxDn)
-			new_line(new_name .. ".SkyboxFt = " .. object.SkyboxFt)
-			new_line(new_name .. ".SkyboxLf = " .. object.SkyboxLf)
-			new_line(new_name .. ".SkyboxRf = " .. object.SkyboxRf)
-			new_line(new_name .. ".SkyboxUp = " .. object.SkyboxUp)
+			code = code .. "\n" .. (new_name .. ".SkyboxBk = " .. object.SkyboxBk)
+			code = code .. "\n" .. (new_name .. ".SkyboxDn = " .. object.SkyboxDn)
+			code = code .. "\n" .. (new_name .. ".SkyboxFt = " .. object.SkyboxFt)
+			code = code .. "\n" .. (new_name .. ".SkyboxLf = " .. object.SkyboxLf)
+			code = code .. "\n" .. (new_name .. ".SkyboxRf = " .. object.SkyboxRf)
+			code = code .. "\n" .. (new_name .. ".SkyboxUp = " .. object.SkyboxUp)
 			
-			new_line(new_name .. ".StartCount = " .. object.StarCount)
-			new_line(new_name .. ".SunAngularSize = " .. object.SunAngularSize)
-			new_line(new_name .. ".SunTextureId = " .. object.SunTextureId)
+			code = code .. "\n" .. (new_name .. ".StartCount = " .. object.StarCount)
+			code = code .. "\n" .. (new_name .. ".SunAngularSize = " .. object.SunAngularSize)
+			code = code .. "\n" .. (new_name .. ".SunTextureId = " .. object.SunTextureId)
 		end
 		
 		if object:IsA("Accessory") then
-			new_line(new_name .. " = Instance.new(\"Accessory\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Accessory\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 			
-			new_line(new_name .. ".AttachmentForward = Vector3.new(" .. tostring(object.AttachmentForward) .. ")")
-			new_line(new_name .. ".AttachmentPos = Vector3.new(" .. tostring(object.AttachmentPos) .. ")")
-			new_line(new_name .. ".AttachmentRight = Vector3.new(" .. tostring(object.AttachmentRight) .. ")")
-			new_line(new_name .. ".AttachmentUp = Vector3.new(" .. tostring(object.AttachmentUp) .. ")")
+			code = code .. "\n" .. (new_name .. ".AttachmentForward = Vector3.new(" .. tostring(object.AttachmentForward) .. ")")
+			code = code .. "\n" .. (new_name .. ".AttachmentPos = Vector3.new(" .. tostring(object.AttachmentPos) .. ")")
+			code = code .. "\n" .. (new_name .. ".AttachmentRight = Vector3.new(" .. tostring(object.AttachmentRight) .. ")")
+			code = code .. "\n" .. (new_name .. ".AttachmentUp = Vector3.new(" .. tostring(object.AttachmentUp) .. ")")
 			
-			new_line(new_name .. ".AccessoryType = " .. tostring(object.AccessoryType))
+			code = code .. "\n" .. (new_name .. ".AccessoryType = " .. tostring(object.AccessoryType))
 		end
 		
 		if object:IsA("Fire") then
-			new_line(new_name .. " = Instance.new(\"Fire\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Fire\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 
 			local R = tostring(object.Color.R)
 			local G = tostring(object.Color.G)
 			local B = tostring(object.Color.B)
-			new_line(new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+			code = code .. "\n" .. (new_name .. ".Color = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
 			
 			local R = tostring(object.SecondaryColor.R)
 			local G = tostring(object.SecondaryColor.G)
 			local B = tostring(object.SecondaryColor.B)
-			new_line(new_name .. ".SecondaryColor = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
+			code = code .. "\n" .. (new_name .. ".SecondaryColor = Color3.fromRGB(" .. R .. ", " .. G .. ", " .. B .. ")")
 		
-			new_line(new_name .. ".Heat = " .. tostring(object.Heat))
-			new_line(new_name .. ".Size = " .. tostring(object.Size))
-			new_line(new_name .. ".TimeScale = " .. tostring(object.TimeScale))
+			code = code .. "\n" .. (new_name .. ".Heat = " .. tostring(object.Heat))
+			code = code .. "\n" .. (new_name .. ".Size = " .. tostring(object.Size))
+			code = code .. "\n" .. (new_name .. ".TimeScale = " .. tostring(object.TimeScale))
 		end
 		
 		if object:IsA("Model") then
-			new_line(new_name .. " = Instance.new(\"Model\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Model\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 		end
 		
 		if object:IsA("Folder") then
-			new_line(new_name .. " = Instance.new(\"Folder\")")
-			new_line(new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
-			new_line(new_name .. ".Parent = " .. object.Parent.Name)
+			code = code .. "\n" .. (new_name .. " = Instance.new(\"Folder\")")
+			code = code .. "\n" .. (new_name .. ".Name = " .. "'" .. string.gsub(old_name, "'", "") .. "'")
+			code = code .. "\n" .. (new_name .. ".Parent = " .. object.Parent.Name)
 		end
 		
 		end
